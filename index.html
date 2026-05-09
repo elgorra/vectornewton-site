@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vector Newton | Salesforce Certified Consultant</title>
+  <meta name="description" content="VectorNewton — Consultora Salesforce certificada. Ventas, Atención al Cliente y Marketing. Colonia del Sacramento, Uruguay." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --black: #0a0a0a;
+      --dark: #111111;
+      --card: #161616;
+      --yellow: #F5C400;
+      --yellow-dim: #c49d00;
+      --white: #f0ece4;
+      --muted: #888;
+      --border: rgba(245, 196, 0, 0.15);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 4rem;
+      background: rgba(10,10,10,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      transition: padding 0.3s;
+    }
+
+    nav img.nav-logo {
+      height: 22px;
+      width: auto;
+      filter: brightness(1);
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2.5rem;
+    }
+
+    nav ul a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    nav ul a:hover { color: var(--yellow); }
+
+    /* ── HERO ── */
+    #inicio {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 8rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #inicio::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 50% 60%, rgba(245,196,0,0.07) 0%, transparent 70%),
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 60px,
+          rgba(245,196,0,0.03) 60px,
+          rgba(245,196,0,0.03) 61px
+        ),
+        repeating-linear-gradient(
+          90deg,
+          transparent,
+          transparent 60px,
+          rgba(245,196,0,0.03) 60px,
+          rgba(245,196,0,0.03) 61px
+        );
+      pointer-events: none;
+    }
+
+    .hero-iso {
+      width: 72px;
+      height: 72px;
+      margin-bottom: 2.5rem;
+      animation: fadeUp 0.8s ease both;
+    }
+
+    .hero-logo {
+      width: min(420px, 80vw);
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.9s ease 0.1s both;
+    }
+
+    .hero-tagline {
+      width: min(340px, 65vw);
+      margin-bottom: 2.5rem;
+      opacity: 0.85;
+      animation: fadeUp 1s ease 0.2s both;
+    }
+
+    .hero-sub {
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: 3rem;
+      animation: fadeUp 1s ease 0.3s both;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      padding: 0.85rem 2.5rem;
+      border: 1px solid var(--yellow);
+      color: var(--yellow);
+      text-decoration: none;
+      font-size: 0.78rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      transition: background 0.2s, color 0.2s;
+      animation: fadeUp 1s ease 0.4s both;
+    }
+
+    .hero-cta:hover {
+      background: var(--yellow);
+      color: var(--black);
+    }
+
+    .scroll-line {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1px;
+      height: 50px;
+      background: linear-gradient(to bottom, var(--yellow), transparent);
+      animation: pulse 2s ease infinite;
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      padding: 7rem 4rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      letter-spacing: 0.05em;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 2rem;
+    }
+
+    .divider {
+      width: 40px;
+      height: 2px;
+      background: var(--yellow);
+      margin-bottom: 2.5rem;
+    }
+
+    /* ── QUIENES SOMOS ── */
+    #quienes {
+      border-top: 1px solid var(--border);
+    }
+
+    .quienes-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .quienes-text p {
+      color: #bbb;
+      font-size: 1rem;
+      line-height: 1.85;
+      margin-bottom: 1.5rem;
+    }
+
+    .badges {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .badge-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0.9;
+    }
+
+    .badge-item img {
+      width: 80px;
+      height: auto;
+      filter: drop-shadow(0 0 8px rgba(245,196,0,0.2));
+    }
+
+    .badge-item span {
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .quienes-visual {
+      position: relative;
+      display: flex;
+      justify-content: center;
+    }
+
+    .quienes-visual .iso-large {
+      width: 180px;
+      opacity: 0.9;
+      filter: drop-shadow(0 0 40px rgba(245,196,0,0.15));
+    }
+
+    .quienes-visual::before {
+      content: '';
+      position: absolute;
+      width: 280px;
+      height: 280px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation: spin 20s linear infinite;
+    }
+
+    /* ── SERVICIOS ── */
+    #servicios {
+      border-top: 1px solid var(--border);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .service-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 2.5rem 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--yellow);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s;
+    }
+
+    .service-card:hover {
+      border-color: rgba(245,196,0,0.4);
+      transform: translateY(-4px);
+    }
+
+    .service-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .service-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3rem;
+      color: rgba(245,196,0,0.12);
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+
+    .service-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      margin-bottom: 1rem;
+    }
+
+    .service-desc {
+      font-size: 0.88rem;
+      color: #999;
+      line-height: 1.75;
+    }
+
+    /* ── CONTACTO ── */
+    #contacto {
+      border-top: 1px solid var(--border);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .contact-info p {
+      color: #bbb;
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+    }
+
+    .contact-info a {
+      color: var(--yellow);
+      text-decoration: none;
+    }
+
+    .contact-info a:hover {
+      text-decoration: underline;
+    }
+
+    .contact-info .address {
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.8;
+    }
+
+    .contact-tagline {
+      font-family: 'Libre Baskerville', serif;
+      font-style: italic;
+      font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+      color: var(--white);
+      line-height: 1.5;
+      opacity: 0.85;
+    }
+
+    .contact-tagline span {
+      color: var(--yellow);
+      font-style: normal;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    footer img {
+      height: 14px;
+      opacity: 0.6;
+    }
+
+    footer p {
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 1; }
+    }
+
+    @keyframes spin {
+      from { transform: translate(-50%, -50%) rotate(0deg); }
+      to   { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      nav ul { gap: 1.2rem; }
+      section { padding: 5rem 1.5rem; }
+      .quienes-grid,
+      .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .quienes-visual { display: none; }
+      .services-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <img src="images/logo-amarillo.avif" alt="Vector Newton" class="nav-logo" />
+    <ul>
+      <li><a href="#inicio">Inicio</a></li>
+      <li><a href="#quienes">Quiénes Somos</a></li>
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="inicio">
+    <img src="images/iso.avif" alt="" class="hero-iso" />
+    <img src="images/logo-main.avif" alt="Vector Newton" class="hero-logo" />
+    <img src="images/righttarget.avif" alt="Right on Target" class="hero-tagline" />
+    <p class="hero-sub">Salesforce Certified Consultant</p>
+    <a href="#contacto" class="hero-cta">Contactanos</a>
+    <div class="scroll-line"></div>
+  </section>
+
+  <!-- QUIENES SOMOS -->
+  <section id="quienes">
+    <div class="quienes-grid">
+      <div class="quienes-text">
+        <p class="section-label">Quiénes Somos</p>
+        <h2 class="section-title">Consultora Salesforce</h2>
+        <div class="divider"></div>
+        <p>VectorNewton se fundó con una única misión: ser la consultora de Salesforce más exitosa del Uruguay. Trabajamos con cada cliente, estudiando a fondo sus necesidades y adaptando la solución a medida.</p>
+        <p>Contactanos y danos la oportunidad de demostrarte la pasión que ponemos en cada cosa que hacemos.</p>
+        <div class="badges">
+          <div class="badge-item">
+            <img src="https://static.wixstatic.com/media/15b1bd_f68be2f3697e466a849097ba0848457c~mv2.png" alt="Salesforce Sales Cloud Consultant" />
+            <span>Sales Cloud<br>Consultant</span>
+          </div>
+          <div class="badge-item">
+            <img src="https://static.wixstatic.com/media/15b1bd_2cb956af78b448019dbfe8f4d9e92023~mv2.png" alt="Salesforce Admin Certified" />
+            <span>Admin<br>Certified</span>
+          </div>
+        </div>
+      </div>
+      <div class="quienes-visual">
+        <img src="images/iso.avif" alt="" class="iso-large" />
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICIOS -->
+  <section id="servicios">
+    <p class="section-label">En qué te ayudamos</p>
+    <h2 class="section-title">Servicios</h2>
+    <div class="divider"></div>
+    <p style="color:#bbb; max-width:560px;">Garantizamos superar tus expectativas en tu implementación de Salesforce.</p>
+
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-number">01</div>
+        <div class="service-name">Ventas</div>
+        <p class="service-desc">Con vasta experiencia en Salesforce, nuestros consultores te ayudarán a llevar tu empresa al próximo nivel. Aprovechamos Sales Cloud 360 para conectar tu equipo de ventas con marketing, servicio, comercio y mucho más.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-number">02</div>
+        <div class="service-name">Atención al Cliente</div>
+        <p class="service-desc">Respondé rápidamente a las necesidades del cliente en cualquier canal. Resolvé casos más rápido con herramientas de productividad potentes, predicciones basadas en IA y soporte instantáneo con chatbot.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-number">03</div>
+        <div class="service-name">Marketing</div>
+        <p class="service-desc">Una plataforma de marketing con herramientas para gestionar eficientemente la interacción de tu marca con clientes y potenciales a través de múltiples canales, en el momento y canal adecuados.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section id="contacto">
+    <div class="contact-grid">
+      <div>
+        <p class="section-label">Contacto</p>
+        <h2 class="section-title">Hablemos</h2>
+        <div class="divider"></div>
+        <div class="contact-info">
+          <p>Para consultas y propuestas:</p>
+          <p><a href="mailto:ventas@vectornewton.com">ventas@vectornewton.com</a></p>
+          <div class="address">
+            Colonia CoWork<br>
+            Avenida 18 de Julio 99<br>
+            Colonia del Sacramento, Uruguay
+          </div>
+        </div>
+      </div>
+      <div>
+        <p class="contact-tagline">
+          Estudiamos a fondo tus necesidades y adaptamos la solución <span>a medida</span>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <img src="images/logo-amarillo.avif" alt="Vector Newton" />
+    <p>©2021 Vector Newton. Todos los derechos reservados.</p>
+  </footer>
+
+</body>
+</html>
