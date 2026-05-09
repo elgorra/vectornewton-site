@@ -7,429 +7,402 @@
   <meta name="description" content="VectorNewton — Consultora Salesforce certificada. Ventas, Atención al Cliente y Marketing. Colonia del Sacramento, Uruguay." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --black: #0a0a0a;
-      --dark: #111111;
-      --card: #161616;
-      --yellow: #F5C400;
-      --yellow-dim: #c49d00;
-      --white: #f0ece4;
-      --muted: #888;
-      --border: rgba(245, 196, 0, 0.15);
+      --yellow: #F5C200;
+      --yellow-dk: #c9a000;
+      --black: #1a1a1a;
+      --grey: #555;
+      --lightgrey: #888;
+      --cardgrey: #636363;
+      --white: #ffffff;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     html { scroll-behavior: smooth; }
+    body { font-family: 'Open Sans', sans-serif; font-weight: 300; color: var(--black); overflow-x: hidden; }
 
-    body {
-      background: var(--black);
-      color: var(--white);
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      line-height: 1.7;
-      overflow-x: hidden;
+    /* GEO PATTERN via inline SVG data URI */
+    .geo {
+      background-color: var(--yellow);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cg fill='none' stroke='%23d4a800' stroke-width='1.5'%3E%3Cline x1='0' y1='0' x2='50' y2='50'/%3E%3Cline x1='50' y1='0' x2='0' y2='50'/%3E%3Cline x1='50' y1='0' x2='100' y2='50'/%3E%3Cline x1='100' y1='0' x2='50' y2='50'/%3E%3Cline x1='0' y1='50' x2='50' y2='100'/%3E%3Cline x1='50' y1='50' x2='0' y2='100'/%3E%3Cline x1='50' y1='50' x2='100' y2='100'/%3E%3Cline x1='100' y1='50' x2='50' y2='100'/%3E%3Crect x='0' y='0' width='100' height='100'/%3E%3C/g%3E%3C/svg%3E");
+      background-size: 100px 100px;
     }
 
     /* ── NAV ── */
     nav {
       position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
+      top: 0; left: 0; right: 0; z-index: 200;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 1.2rem 4rem;
-      background: rgba(10,10,10,0.92);
+      padding: 0.9rem 5vw;
+      background: rgba(26,26,26,0.97);
       backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-      transition: padding 0.3s;
     }
 
-    nav img.nav-logo {
-      height: 22px;
-      width: auto;
-      filter: brightness(1);
-    }
+    .nav-brand { display: flex; align-items: center; text-decoration: none; }
+    .nav-brand img { height: 22px; }
 
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 2.5rem;
-    }
-
+    nav ul { list-style: none; display: flex; gap: 2.2rem; }
     nav ul a {
-      color: var(--muted);
+      color: #999;
       text-decoration: none;
-      font-size: 0.78rem;
-      letter-spacing: 0.12em;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
       transition: color 0.2s;
     }
-
     nav ul a:hover { color: var(--yellow); }
 
     /* ── HERO ── */
     #inicio {
       min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 2.2fr 1fr;
+      padding-top: 60px;
+    }
+
+    .hero-panel {
+      min-height: calc(100vh - 60px);
+    }
+
+    .hero-center {
+      background: var(--white);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 8rem 2rem 4rem;
-      position: relative;
-      overflow: hidden;
+      padding: 4rem 2.5rem;
     }
 
-    #inicio::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 60% 50% at 50% 60%, rgba(245,196,0,0.07) 0%, transparent 70%),
-        repeating-linear-gradient(
-          0deg,
-          transparent,
-          transparent 60px,
-          rgba(245,196,0,0.03) 60px,
-          rgba(245,196,0,0.03) 61px
-        ),
-        repeating-linear-gradient(
-          90deg,
-          transparent,
-          transparent 60px,
-          rgba(245,196,0,0.03) 60px,
-          rgba(245,196,0,0.03) 61px
-        );
-      pointer-events: none;
-    }
-
-    .hero-iso {
-      width: 72px;
-      height: 72px;
+    .hero-center img.logo-main {
+      width: min(380px, 85%);
       margin-bottom: 2.5rem;
       animation: fadeUp 0.8s ease both;
     }
 
-    .hero-logo {
-      width: min(420px, 80vw);
-      margin-bottom: 1.5rem;
-      animation: fadeUp 0.9s ease 0.1s both;
-    }
-
-    .hero-tagline {
-      width: min(340px, 65vw);
-      margin-bottom: 2.5rem;
-      opacity: 0.85;
-      animation: fadeUp 1s ease 0.2s both;
+    .hero-center img.tagline {
+      width: min(260px, 65%);
+      opacity: 0.88;
+      margin-bottom: 2rem;
+      animation: fadeUp 0.9s ease 0.15s both;
     }
 
     .hero-sub {
-      font-size: 0.8rem;
-      letter-spacing: 0.2em;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: var(--yellow);
-      margin-bottom: 3rem;
-      animation: fadeUp 1s ease 0.3s both;
+      color: var(--yellow-dk);
+      margin-bottom: 2.5rem;
+      animation: fadeUp 0.9s ease 0.25s both;
     }
 
-    .hero-cta {
+    .btn-yellow {
       display: inline-block;
-      padding: 0.85rem 2.5rem;
-      border: 1px solid var(--yellow);
-      color: var(--yellow);
-      text-decoration: none;
-      font-size: 0.78rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      transition: background 0.2s, color 0.2s;
-      animation: fadeUp 1s ease 0.4s both;
-    }
-
-    .hero-cta:hover {
+      padding: 0.85rem 2.4rem;
       background: var(--yellow);
       color: var(--black);
-    }
-
-    .scroll-line {
-      position: absolute;
-      bottom: 2.5rem;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 1px;
-      height: 50px;
-      background: linear-gradient(to bottom, var(--yellow), transparent);
-      animation: pulse 2s ease infinite;
-    }
-
-    /* ── SECTIONS ── */
-    section {
-      padding: 7rem 4rem;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    .section-label {
-      font-size: 0.7rem;
-      letter-spacing: 0.25em;
+      text-decoration: none;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: var(--yellow);
-      margin-bottom: 1rem;
+      transition: background 0.2s, transform 0.15s;
+      animation: fadeUp 0.9s ease 0.35s both;
+    }
+    .btn-yellow:hover { background: var(--yellow-dk); transform: translateY(-2px); }
+
+    /* ── SECTION BAND (yellow with pattern + title) ── */
+    .band {
+      padding: 3rem 5vw;
     }
 
-    .section-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(2.5rem, 5vw, 4rem);
-      letter-spacing: 0.05em;
-      color: var(--white);
+    .band h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.8rem);
+      font-weight: 900;
+      text-transform: uppercase;
       line-height: 1;
-      margin-bottom: 2rem;
+      color: var(--black);
+      margin-bottom: 0.8rem;
     }
 
-    .divider {
-      width: 40px;
-      height: 2px;
-      background: var(--yellow);
-      margin-bottom: 2.5rem;
+    .band p {
+      font-size: 0.95rem;
+      color: rgba(0,0,0,0.65);
+      max-width: 500px;
     }
 
-    /* ── QUIENES SOMOS ── */
-    #quienes {
-      border-top: 1px solid var(--border);
+    /* ── WHITE CONTENT SECTIONS ── */
+    .content-section {
+      background: var(--white);
+      padding: 4.5rem 5vw;
     }
 
-    .quienes-grid {
+    /* ── QUIENES ── */
+    .quienes-wrap {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 5rem;
-      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      gap: 0;
+      align-items: stretch;
+    }
+
+    .quienes-text { padding: 2rem 4rem 2rem 0; }
+
+    .icon-circle {
+      width: 68px; height: 68px;
+      background: var(--black);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.2rem;
+    }
+
+    .icon-circle img { width: 40px; }
+
+    .accent-bar { width: 30px; height: 2.5px; background: var(--black); margin-bottom: 1.4rem; }
+    .accent-bar.y { background: var(--yellow); }
+
+    .quienes-text h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(1.6rem, 3vw, 2.5rem);
+      font-weight: 800;
+      text-transform: uppercase;
+      line-height: 1.1;
+      margin-bottom: 1.4rem;
     }
 
     .quienes-text p {
-      color: #bbb;
-      font-size: 1rem;
-      line-height: 1.85;
-      margin-bottom: 1.5rem;
+      font-size: 0.92rem;
+      color: var(--grey);
+      line-height: 1.9;
+      margin-bottom: 1rem;
     }
 
-    .badges {
-      display: flex;
-      gap: 1.5rem;
-      margin-top: 2rem;
-      flex-wrap: wrap;
-    }
-
-    .badge-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.5rem;
-      opacity: 0.9;
-    }
-
-    .badge-item img {
-      width: 80px;
-      height: auto;
-      filter: drop-shadow(0 0 8px rgba(245,196,0,0.2));
-    }
-
-    .badge-item span {
-      font-size: 0.65rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--muted);
-      text-align: center;
-    }
+    .badges { display: flex; gap: 1.2rem; margin-top: 1.8rem; flex-wrap: wrap; align-items: center; }
+    .badges img { width: 68px; height: auto; }
 
     .quienes-visual {
-      position: relative;
+      background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%);
       display: flex;
+      align-items: center;
       justify-content: center;
+      min-height: 400px;
+      position: relative;
+      overflow: hidden;
     }
 
-    .quienes-visual .iso-large {
-      width: 180px;
-      opacity: 0.9;
-      filter: drop-shadow(0 0 40px rgba(245,196,0,0.15));
-    }
-
+    /* Faux office photo using CSS */
     .quienes-visual::before {
       content: '';
       position: absolute;
-      width: 280px;
-      height: 280px;
-      border: 1px solid var(--border);
-      border-radius: 50%;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      animation: spin 20s linear infinite;
+      inset: 0;
+      background:
+        radial-gradient(circle at 30% 40%, rgba(255,255,255,0.9) 0%, transparent 50%),
+        linear-gradient(135deg, #e8e8e8 0%, #d0d0d0 100%);
     }
 
-    /* ── SERVICIOS ── */
-    #servicios {
-      border-top: 1px solid var(--border);
+    .quienes-visual-inner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
     }
 
+    .quienes-visual-inner img.iso-big {
+      width: 120px;
+      filter: drop-shadow(0 8px 24px rgba(0,0,0,0.15));
+    }
+
+    .sf-badge-wrap {
+      background: white;
+      border-radius: 12px;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+
+    .sf-badge-wrap img { width: 52px; }
+
+    .sf-badge-wrap span {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: #00a1e0;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── SERVICES ── */
     .services-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-      margin-top: 3rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      border-top: 1px solid rgba(0,0,0,0.08);
     }
 
-    .service-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      padding: 2.5rem 2rem;
-      position: relative;
-      overflow: hidden;
-      transition: border-color 0.3s, transform 0.3s;
+    .svc {
+      padding: 3rem 2.5rem;
+      text-align: center;
+      border-right: 1px solid rgba(0,0,0,0.08);
+      transition: transform 0.2s;
+    }
+    .svc:last-child { border-right: none; }
+    .svc:hover { transform: translateY(-4px); }
+
+    .svc-icon {
+      width: 56px; height: 56px;
+      margin: 0 auto 1.5rem;
     }
 
-    .service-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: var(--yellow);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.3s;
+    .svc-icon svg { width: 100%; height: 100%; }
+
+    .svc:nth-child(1) { background: var(--black); }
+    .svc:nth-child(1) .svc-icon svg { stroke: var(--yellow); }
+    .svc:nth-child(1) h3 { color: var(--yellow); }
+    .svc:nth-child(1) p { color: rgba(255,255,255,0.65); }
+
+    .svc:nth-child(2) { background: var(--yellow); }
+    .svc:nth-child(2) .svc-icon svg { stroke: var(--black); }
+    .svc:nth-child(2) h3 { color: var(--black); }
+    .svc:nth-child(2) p { color: rgba(0,0,0,0.7); }
+
+    .svc:nth-child(3) { background: var(--cardgrey); }
+    .svc:nth-child(3) .svc-icon svg { stroke: var(--yellow); }
+    .svc:nth-child(3) h3 { color: var(--yellow); }
+    .svc:nth-child(3) p { color: rgba(255,255,255,0.65); }
+
+    .svc h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      line-height: 1.5;
     }
 
-    .service-card:hover {
-      border-color: rgba(245,196,0,0.4);
-      transform: translateY(-4px);
-    }
+    .svc p { font-size: 0.85rem; line-height: 1.85; }
 
-    .service-card:hover::before {
-      transform: scaleX(1);
-    }
-
-    .service-number {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 3rem;
-      color: rgba(245,196,0,0.12);
-      line-height: 1;
-      margin-bottom: 1rem;
-    }
-
-    .service-name {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.6rem;
-      letter-spacing: 0.08em;
-      color: var(--white);
-      margin-bottom: 1rem;
-    }
-
-    .service-desc {
-      font-size: 0.88rem;
-      color: #999;
-      line-height: 1.75;
-    }
-
-    /* ── CONTACTO ── */
-    #contacto {
-      border-top: 1px solid var(--border);
-    }
-
-    .contact-grid {
+    /* ── CONTACT ── */
+    .contact-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 5rem;
       align-items: start;
     }
 
-    .contact-info p {
-      color: #bbb;
-      margin-bottom: 0.5rem;
-      font-size: 0.95rem;
+    .contact-left h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(1.6rem, 3vw, 2.5rem);
+      font-weight: 800;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
     }
 
-    .contact-info a {
-      color: var(--yellow);
-      text-decoration: none;
+    .contact-left p { font-size: 0.9rem; color: var(--grey); line-height: 1.8; margin-bottom: 0.4rem; }
+    .contact-left a { color: var(--yellow-dk); text-decoration: none; font-size: 0.95rem; }
+    .contact-left a:hover { text-decoration: underline; }
+
+    .contact-address {
+      margin-top: 1.8rem;
+      padding-top: 1.8rem;
+      border-top: 1px solid #eee;
+      font-size: 0.85rem;
+      color: var(--lightgrey);
+      line-height: 2;
     }
 
-    .contact-info a:hover {
-      text-decoration: underline;
+    /* Form */
+    .contact-form { display: flex; flex-direction: column; gap: 0.65rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.65rem; }
+
+    .contact-form input,
+    .contact-form textarea,
+    .contact-form select {
+      width: 100%;
+      padding: 0.7rem 0.9rem;
+      border: 1px solid #ddd;
+      font-family: 'Open Sans', sans-serif;
+      font-size: 0.82rem;
+      color: var(--black);
+      background: #fafafa;
+      outline: none;
+      transition: border-color 0.2s;
+      border-radius: 0;
+      appearance: none;
     }
 
-    .contact-info .address {
-      margin-top: 2rem;
-      padding-top: 2rem;
-      border-top: 1px solid var(--border);
-      color: var(--muted);
-      font-size: 0.88rem;
-      line-height: 1.8;
-    }
+    .contact-form input::placeholder,
+    .contact-form textarea::placeholder { color: #bbb; }
+    .contact-form input:focus,
+    .contact-form textarea:focus { border-color: var(--yellow-dk); background: white; }
+    .contact-form textarea { height: 80px; resize: none; }
 
-    .contact-tagline {
-      font-family: 'Libre Baskerville', serif;
-      font-style: italic;
-      font-size: clamp(1.2rem, 2.5vw, 1.8rem);
-      color: var(--white);
-      line-height: 1.5;
-      opacity: 0.85;
+    .btn-dark {
+      display: inline-block;
+      padding: 0.8rem 2rem;
+      background: var(--black);
+      color: white;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s;
+      align-self: flex-start;
     }
-
-    .contact-tagline span {
-      color: var(--yellow);
-      font-style: normal;
-    }
+    .btn-dark:hover { background: var(--yellow); color: var(--black); }
 
     /* ── FOOTER ── */
     footer {
-      border-top: 1px solid var(--border);
-      padding: 2.5rem 4rem;
+      background: var(--black);
+      padding: 1.4rem 5vw;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      max-width: 1100px;
-      margin: 0 auto;
     }
-
-    footer img {
-      height: 14px;
-      opacity: 0.6;
-    }
-
-    footer p {
-      font-size: 0.72rem;
-      color: var(--muted);
-      letter-spacing: 0.05em;
-    }
+    footer img { height: 14px; opacity: 0.6; }
+    footer p { font-size: 0.68rem; color: #555; }
 
     /* ── ANIMATIONS ── */
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
+      from { opacity: 0; transform: translateY(18px); }
       to   { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 0.4; }
-      50% { opacity: 1; }
-    }
-
-    @keyframes spin {
-      from { transform: translate(-50%, -50%) rotate(0deg); }
-      to   { transform: translate(-50%, -50%) rotate(360deg); }
     }
 
     /* ── MOBILE ── */
     @media (max-width: 768px) {
-      nav { padding: 1rem 1.5rem; }
-      nav ul { gap: 1.2rem; }
-      section { padding: 5rem 1.5rem; }
-      .quienes-grid,
-      .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
-      .quienes-visual { display: none; }
+      nav { padding: 0.9rem 1.5rem; }
+      nav ul { gap: 1rem; }
+      nav ul a { font-size: 0.6rem; letter-spacing: 0.08em; }
+      #inicio { grid-template-columns: 0.25fr 1fr 0.25fr; }
+      .quienes-wrap { grid-template-columns: 1fr; }
+      .quienes-text { padding: 0; }
+      .quienes-visual { min-height: 280px; }
       .services-grid { grid-template-columns: 1fr; }
-      footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.5rem; }
+      .svc { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
+      .contact-wrap { grid-template-columns: 1fr; gap: 3rem; }
+      .form-row { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 0.6rem; text-align: center; }
     }
   </style>
 </head>
@@ -437,7 +410,9 @@
 
   <!-- NAV -->
   <nav>
-    <img src="images/logo-amarillo.avif" alt="Vector Newton" class="nav-logo" />
+    <a href="#inicio" class="nav-brand">
+      <img src="images/logo-amarillo.avif" alt="Vector Newton" />
+    </a>
     <ul>
       <li><a href="#inicio">Inicio</a></li>
       <li><a href="#quienes">Quiénes Somos</a></li>
@@ -448,95 +423,137 @@
 
   <!-- HERO -->
   <section id="inicio">
-    <img src="images/iso.avif" alt="" class="hero-iso" />
-    <img src="images/logo-main.avif" alt="Vector Newton" class="hero-logo" />
-    <img src="images/righttarget.avif" alt="Right on Target" class="hero-tagline" />
-    <p class="hero-sub">Salesforce Certified Consultant</p>
-    <a href="#contacto" class="hero-cta">Contactanos</a>
-    <div class="scroll-line"></div>
+    <div class="hero-panel geo"></div>
+    <div class="hero-center">
+      <img src="images/logo-main.avif" alt="Vector Newton" class="logo-main" />
+      <img src="images/righttarget.avif" alt="Right on Target" class="tagline" />
+      <p class="hero-sub">Salesforce Certified Consultant</p>
+      <a href="#contacto" class="btn-yellow">Contactanos</a>
+    </div>
+    <div class="hero-panel geo"></div>
   </section>
 
-  <!-- QUIENES SOMOS -->
-  <section id="quienes">
-    <div class="quienes-grid">
+  <!-- BAND: QUIENES -->
+  <div class="band geo" id="quienes-band">
+    <h2>Quiénes<br>Somos</h2>
+  </div>
+
+  <!-- QUIENES CONTENT -->
+  <div class="content-section" id="quienes">
+    <div class="quienes-wrap">
       <div class="quienes-text">
-        <p class="section-label">Quiénes Somos</p>
-        <h2 class="section-title">Consultora Salesforce</h2>
-        <div class="divider"></div>
+        <div class="icon-circle">
+          <img src="images/iso.avif" alt="" />
+        </div>
+        <div class="accent-bar"></div>
+        <h2>Quienes<br>Somos</h2>
         <p>VectorNewton se fundó con una única misión: ser la consultora de Salesforce más exitosa del Uruguay. Trabajamos con cada cliente, estudiando a fondo sus necesidades y adaptando la solución a medida.</p>
         <p>Contactanos y danos la oportunidad de demostrarte la pasión que ponemos en cada cosa que hacemos.</p>
         <div class="badges">
-          <div class="badge-item">
-            <img src="https://static.wixstatic.com/media/15b1bd_f68be2f3697e466a849097ba0848457c~mv2.png" alt="Salesforce Sales Cloud Consultant" />
-            <span>Sales Cloud<br>Consultant</span>
-          </div>
-          <div class="badge-item">
-            <img src="https://static.wixstatic.com/media/15b1bd_2cb956af78b448019dbfe8f4d9e92023~mv2.png" alt="Salesforce Admin Certified" />
-            <span>Admin<br>Certified</span>
-          </div>
+          <img src="https://static.wixstatic.com/media/15b1bd_f68be2f3697e466a849097ba0848457c~mv2.png" alt="Sales Cloud Consultant" />
+          <img src="https://static.wixstatic.com/media/15b1bd_2cb956af78b448019dbfe8f4d9e92023~mv2.png" alt="Admin Certified" />
         </div>
       </div>
       <div class="quienes-visual">
-        <img src="images/iso.avif" alt="" class="iso-large" />
-      </div>
-    </div>
-  </section>
-
-  <!-- SERVICIOS -->
-  <section id="servicios">
-    <p class="section-label">En qué te ayudamos</p>
-    <h2 class="section-title">Servicios</h2>
-    <div class="divider"></div>
-    <p style="color:#bbb; max-width:560px;">Garantizamos superar tus expectativas en tu implementación de Salesforce.</p>
-
-    <div class="services-grid">
-      <div class="service-card">
-        <div class="service-number">01</div>
-        <div class="service-name">Ventas</div>
-        <p class="service-desc">Con vasta experiencia en Salesforce, nuestros consultores te ayudarán a llevar tu empresa al próximo nivel. Aprovechamos Sales Cloud 360 para conectar tu equipo de ventas con marketing, servicio, comercio y mucho más.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-number">02</div>
-        <div class="service-name">Atención al Cliente</div>
-        <p class="service-desc">Respondé rápidamente a las necesidades del cliente en cualquier canal. Resolvé casos más rápido con herramientas de productividad potentes, predicciones basadas en IA y soporte instantáneo con chatbot.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-number">03</div>
-        <div class="service-name">Marketing</div>
-        <p class="service-desc">Una plataforma de marketing con herramientas para gestionar eficientemente la interacción de tu marca con clientes y potenciales a través de múltiples canales, en el momento y canal adecuados.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACTO -->
-  <section id="contacto">
-    <div class="contact-grid">
-      <div>
-        <p class="section-label">Contacto</p>
-        <h2 class="section-title">Hablemos</h2>
-        <div class="divider"></div>
-        <div class="contact-info">
-          <p>Para consultas y propuestas:</p>
-          <p><a href="mailto:ventas@vectornewton.com">ventas@vectornewton.com</a></p>
-          <div class="address">
-            Colonia CoWork<br>
-            Avenida 18 de Julio 99<br>
-            Colonia del Sacramento, Uruguay
+        <div class="quienes-visual-inner">
+          <img src="images/iso.avif" alt="Vector Newton" class="iso-big" />
+          <div class="sf-badge-wrap">
+            <img src="https://static.wixstatic.com/media/15b1bd_f68be2f3697e466a849097ba0848457c~mv2.png" alt="" />
+            <span>Salesforce<br>Certified Partner</span>
           </div>
         </div>
       </div>
-      <div>
-        <p class="contact-tagline">
-          Estudiamos a fondo tus necesidades y adaptamos la solución <span>a medida</span>.
-        </p>
+    </div>
+  </div>
+
+  <!-- BAND: SERVICIOS -->
+  <div class="band geo" id="servicios-band">
+    <h2>En qué te<br>ayudamos</h2>
+    <p>Garantizamos superar tus expectativas en tu implementación de Salesforce.</p>
+  </div>
+
+  <!-- SERVICES -->
+  <div class="content-section" id="servicios" style="padding-top:0; padding-bottom:0;">
+    <div class="services-grid">
+
+      <div class="svc">
+        <div class="svc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+          </svg>
+        </div>
+        <h3>Ventas</h3>
+        <p>Con vasta experiencia en Salesforce, nuestros consultores te ayudarán a llevar tu empresa al próximo nivel. Aprovechamos Sales Cloud 360 para conectar tu equipo de ventas con marketing, servicio, comercio y mucho más.</p>
+      </div>
+
+      <div class="svc">
+        <div class="svc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
+        </div>
+        <h3>Atención<br>al Cliente</h3>
+        <p>Respondé rápidamente a las necesidades del cliente en cualquier canal. Resolvé casos más rápido con herramientas potentes, predicciones basadas en IA y soporte instantáneo con chatbot.</p>
+      </div>
+
+      <div class="svc">
+        <div class="svc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+          </svg>
+        </div>
+        <h3>Marketing</h3>
+        <p>Una plataforma con múltiples herramientas para gestionar eficientemente la interacción de tu marca con clientes a través de diferentes canales, en el momento y canal adecuados.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- BAND: CONTACTO -->
+  <div class="band geo" id="contacto-band">
+    <h2>Contacto</h2>
+  </div>
+
+  <!-- CONTACTO -->
+  <div class="content-section" id="contacto">
+    <div class="contact-wrap">
+      <div class="contact-left">
+        <div class="icon-circle">
+          <img src="images/iso.avif" alt="" />
+        </div>
+        <div class="accent-bar"></div>
+        <h2>Contacto</h2>
+        <p>Para consultas y propuestas:</p>
+        <a href="mailto:ventas@vectornewton.com">ventas@vectornewton.com</a>
+        <div class="contact-address">
+          Colonia CoWork<br>
+          Avenida 18 de Julio 99<br>
+          Colonia del Sacramento, Uruguay
+        </div>
+      </div>
+      <div class="contact-form">
+        <div class="form-row">
+          <input type="text" placeholder="Nombre" />
+          <input type="text" placeholder="Apellido" />
+        </div>
+        <input type="email" placeholder="Email" />
+        <input type="text" placeholder="Empresa" />
+        <div class="form-row">
+          <input type="text" placeholder="Ciudad" />
+          <input type="text" placeholder="País" />
+        </div>
+        <textarea placeholder="Comentario"></textarea>
+        <button class="btn-dark">Enviar</button>
       </div>
     </div>
-  </section>
+  </div>
 
   <!-- FOOTER -->
   <footer>
     <img src="images/logo-amarillo.avif" alt="Vector Newton" />
-    <p>©2021 Vector Newton. Todos los derechos reservados.</p>
+    <p>©2021 by VectorNewton. ©Images by freepik</p>
   </footer>
 
 </body>
