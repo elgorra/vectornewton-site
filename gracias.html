@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>¡Gracias! | Vector Newton</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" type="image/png" href="images/favicon.png" />
+  <link rel="apple-touch-icon" href="images/favicon-180.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --yellow: #F5C200;
+      --yellow-dk: #c9a000;
+      --black: #1a1a1a;
+      --grey: #555;
+      --lightgrey: #999;
+      --white: #ffffff;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Open Sans', sans-serif;
+      font-weight: 300;
+      color: var(--black);
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .geo {
+      background-image: url('images/trama.png');
+      background-size: 200px 200px;
+      background-color: var(--yellow);
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.8rem 5vw;
+      background: rgba(26,26,26,0.97);
+      backdrop-filter: blur(12px);
+    }
+    .nav-brand { display: flex; align-items: center; text-decoration: none; }
+    .nav-brand img { height: 28px; width: auto; }
+    nav ul { list-style: none; display: flex; gap: 2.2rem; }
+    nav ul a {
+      color: #999; text-decoration: none;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    nav ul a:hover { color: var(--yellow); }
+
+    /* MAIN */
+    main {
+      flex: 1;
+      padding-top: 50px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* TOP BAND */
+    .top-band {
+      padding: 3.5rem 5vw 3rem;
+    }
+    .top-band .eyebrow {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: rgba(0,0,0,0.5); margin-bottom: 0.8rem;
+    }
+    .top-band h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 900; text-transform: uppercase;
+      line-height: 1; color: var(--black);
+    }
+
+    /* CONTENT */
+    .thank-you-content {
+      background: var(--white);
+      flex: 1;
+      display: flex;
+      align-items: center;
+      padding: 5rem 5vw;
+    }
+
+    .thank-you-inner {
+      max-width: 600px;
+    }
+
+    .check-icon {
+      width: 52px; height: 52px;
+      background: var(--yellow);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 2rem;
+    }
+    .check-icon svg { width: 26px; height: 26px; }
+
+    .thank-you-inner h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 900; text-transform: uppercase;
+      line-height: 1.15; color: var(--black);
+      margin-bottom: 1.2rem;
+    }
+
+    .thank-you-inner p {
+      font-size: 0.95rem;
+      color: var(--grey);
+      line-height: 1.9;
+      margin-bottom: 0.8rem;
+    }
+
+    .btn-yellow {
+      display: inline-block; padding: 0.85rem 2.4rem;
+      background: var(--yellow); color: var(--black);
+      text-decoration: none;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.68rem; font-weight: 700;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      transition: background 0.2s, transform 0.15s;
+      margin-top: 1.5rem;
+      animation: fadeUp 0.7s ease 0.2s both;
+    }
+    .btn-yellow:hover { background: var(--yellow-dk); transform: translateY(-2px); }
+
+    /* FOOTER */
+    footer {
+      background: var(--black); padding: 1.4rem 5vw;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    footer img { height: 20px; opacity: 0.7; }
+    footer p { font-size: 0.68rem; color: #555; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 0.8rem 1.5rem; }
+      nav ul { gap: 1rem; }
+      nav ul a { font-size: 0.6rem; }
+      .thank-you-content { padding: 3.5rem 1.5rem; }
+      .top-band { padding: 2.5rem 1.5rem 2rem; }
+      footer { flex-direction: column; gap: 0.6rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-brand">
+      <img src="images/logo-mini.png" alt="Vector Newton" />
+    </a>
+    <ul>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="index.html#quienes">Quiénes Somos</a></li>
+      <li><a href="index.html#servicios">Servicios</a></li>
+      <li><a href="index.html#contacto">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <!-- TOP BAND -->
+    <div class="top-band geo">
+      <p class="eyebrow">Formulario recibido</p>
+      <h1>¡Gracias!</h1>
+    </div>
+
+    <!-- THANK YOU CONTENT -->
+    <div class="thank-you-content">
+      <div class="thank-you-inner">
+        <div class="check-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+        </div>
+        <h2>Tu mensaje fue enviado con éxito</h2>
+        <p>Recibimos tu consulta y nos pondremos en contacto a la brevedad.</p>
+        <p>Si tenés alguna urgencia, podés escribirnos directamente a <a href="mailto:ventas@vectornewton.com" style="color:var(--yellow-dk); font-weight:600; text-decoration:none;">ventas@vectornewton.com</a>.</p>
+        <a href="index.html" class="btn-yellow">Volver al inicio</a>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <img src="images/logo-mini.png" alt="Vector Newton" />
+    <p>©2021 by VectorNewton. ©Images by freepik</p>
+  </footer>
+
+</body>
+</html>
