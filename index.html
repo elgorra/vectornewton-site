@@ -14,7 +14,7 @@
       --yellow-dk: #c9a000;
       --black: #1a1a1a;
       --grey: #555;
-      --lightgrey: #888;
+      --lightgrey: #999;
       --cardgrey: #636363;
       --white: #ffffff;
     }
@@ -23,384 +23,247 @@
     html { scroll-behavior: smooth; }
     body { font-family: 'Open Sans', sans-serif; font-weight: 300; color: var(--black); overflow-x: hidden; }
 
-    /* GEO PATTERN via inline SVG data URI */
     .geo {
       background-color: var(--yellow);
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cg fill='none' stroke='%23d4a800' stroke-width='1.5'%3E%3Cline x1='0' y1='0' x2='50' y2='50'/%3E%3Cline x1='50' y1='0' x2='0' y2='50'/%3E%3Cline x1='50' y1='0' x2='100' y2='50'/%3E%3Cline x1='100' y1='0' x2='50' y2='50'/%3E%3Cline x1='0' y1='50' x2='50' y2='100'/%3E%3Cline x1='50' y1='50' x2='0' y2='100'/%3E%3Cline x1='50' y1='50' x2='100' y2='100'/%3E%3Cline x1='100' y1='50' x2='50' y2='100'/%3E%3Crect x='0' y='0' width='100' height='100'/%3E%3C/g%3E%3C/svg%3E");
       background-size: 100px 100px;
     }
 
-    /* ── NAV ── */
+    /* NAV */
     nav {
-      position: fixed;
-      top: 0; left: 0; right: 0; z-index: 200;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      display: flex; align-items: center; justify-content: space-between;
       padding: 0.9rem 5vw;
       background: rgba(26,26,26,0.97);
       backdrop-filter: blur(12px);
     }
-
-    .nav-brand { display: flex; align-items: center; text-decoration: none; }
     .nav-brand img { height: 22px; }
-
     nav ul { list-style: none; display: flex; gap: 2.2rem; }
     nav ul a {
-      color: #999;
-      text-decoration: none;
+      color: #999; text-decoration: none;
       font-family: 'Montserrat', sans-serif;
-      font-size: 0.68rem;
-      font-weight: 600;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
+      font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
       transition: color 0.2s;
     }
     nav ul a:hover { color: var(--yellow); }
 
-    /* ── HERO ── */
+    /* HERO */
     #inicio {
       min-height: 100vh;
       display: grid;
       grid-template-columns: 1fr 2.2fr 1fr;
       padding-top: 60px;
     }
-
-    .hero-panel {
-      min-height: calc(100vh - 60px);
-    }
-
+    .hero-panel { min-height: calc(100vh - 60px); }
     .hero-center {
       background: var(--white);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 4rem 2.5rem;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 4rem 2.5rem;
+      min-height: calc(100vh - 60px);
     }
-
     .hero-center img.logo-main {
       width: min(380px, 85%);
       margin-bottom: 2.5rem;
       animation: fadeUp 0.8s ease both;
     }
-
     .hero-center img.tagline {
       width: min(260px, 65%);
-      opacity: 0.88;
-      margin-bottom: 2rem;
+      opacity: 0.88; margin-bottom: 2rem;
       animation: fadeUp 0.9s ease 0.15s both;
     }
-
     .hero-sub {
       font-family: 'Montserrat', sans-serif;
-      font-size: 0.68rem;
-      font-weight: 600;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--yellow-dk);
-      margin-bottom: 2.5rem;
+      font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--yellow-dk); margin-bottom: 2.5rem;
       animation: fadeUp 0.9s ease 0.25s both;
     }
-
     .btn-yellow {
-      display: inline-block;
-      padding: 0.85rem 2.4rem;
-      background: var(--yellow);
-      color: var(--black);
+      display: inline-block; padding: 0.85rem 2.4rem;
+      background: var(--yellow); color: var(--black);
       text-decoration: none;
       font-family: 'Montserrat', sans-serif;
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
+      font-size: 0.68rem; font-weight: 700;
+      letter-spacing: 0.16em; text-transform: uppercase;
       transition: background 0.2s, transform 0.15s;
       animation: fadeUp 0.9s ease 0.35s both;
     }
     .btn-yellow:hover { background: var(--yellow-dk); transform: translateY(-2px); }
 
-    /* ── SECTION BAND (yellow with pattern + title) ── */
+    /* YELLOW BAND - section headers */
     .band {
       padding: 3rem 5vw;
     }
-
     .band h2 {
       font-family: 'Montserrat', sans-serif;
-      font-size: clamp(2rem, 5vw, 3.8rem);
-      font-weight: 900;
-      text-transform: uppercase;
-      line-height: 1;
-      color: var(--black);
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      font-weight: 900; text-transform: uppercase;
+      line-height: 1; color: var(--black);
       margin-bottom: 0.8rem;
     }
-
     .band p {
       font-size: 0.95rem;
-      color: rgba(0,0,0,0.65);
+      color: rgba(0,0,0,0.6);
       max-width: 500px;
     }
 
-    /* ── WHITE CONTENT SECTIONS ── */
-    .content-section {
-      background: var(--white);
-      padding: 4.5rem 5vw;
-    }
+    /* WHITE CONTENT */
+    .content { background: var(--white); padding: 5rem 5vw; }
 
-    /* ── QUIENES ── */
-    .quienes-wrap {
+    /* QUIENES */
+    .quienes-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      max-width: 1200px;
-      margin: 0 auto;
-      gap: 0;
-      align-items: stretch;
+      max-width: 1200px; margin: 0 auto;
+      gap: 5rem; align-items: center;
     }
-
-    .quienes-text { padding: 2rem 4rem 2rem 0; }
-
-    .icon-circle {
-      width: 68px; height: 68px;
-      background: var(--black);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      margin-bottom: 1.2rem;
-    }
-
-    .icon-circle img { width: 40px; }
-
-    .accent-bar { width: 30px; height: 2.5px; background: var(--black); margin-bottom: 1.4rem; }
-    .accent-bar.y { background: var(--yellow); }
-
-    .quienes-text h2 {
-      font-family: 'Montserrat', sans-serif;
-      font-size: clamp(1.6rem, 3vw, 2.5rem);
-      font-weight: 800;
-      text-transform: uppercase;
-      line-height: 1.1;
-      margin-bottom: 1.4rem;
-    }
-
     .quienes-text p {
-      font-size: 0.92rem;
-      color: var(--grey);
-      line-height: 1.9;
-      margin-bottom: 1rem;
+      font-size: 0.95rem; color: var(--grey);
+      line-height: 1.9; margin-bottom: 1.1rem;
     }
-
-    .badges { display: flex; gap: 1.2rem; margin-top: 1.8rem; flex-wrap: wrap; align-items: center; }
+    .badges { display: flex; gap: 1.2rem; margin-top: 2rem; flex-wrap: wrap; align-items: center; }
     .badges img { width: 68px; height: auto; }
 
     .quienes-visual {
-      background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 400px;
-      position: relative;
-      overflow: hidden;
+      background: #f2f2f2;
+      border-radius: 4px;
+      min-height: 380px;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
     }
-
-    /* Faux office photo using CSS */
-    .quienes-visual::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle at 30% 40%, rgba(255,255,255,0.9) 0%, transparent 50%),
-        linear-gradient(135deg, #e8e8e8 0%, #d0d0d0 100%);
-    }
-
     .quienes-visual-inner {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1rem;
+      display: flex; flex-direction: column;
+      align-items: center; gap: 1.5rem;
     }
-
     .quienes-visual-inner img.iso-big {
-      width: 120px;
+      width: 110px;
       filter: drop-shadow(0 8px 24px rgba(0,0,0,0.15));
     }
-
-    .sf-badge-wrap {
-      background: white;
-      border-radius: 12px;
-      padding: 1rem 1.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
+    .sf-card {
+      background: white; border-radius: 10px;
+      padding: 1rem 1.4rem;
+      display: flex; align-items: center; gap: 0.8rem;
       box-shadow: 0 4px 20px rgba(0,0,0,0.1);
     }
-
-    .sf-badge-wrap img { width: 52px; }
-
-    .sf-badge-wrap span {
+    .sf-card img { width: 48px; }
+    .sf-card span {
       font-family: 'Montserrat', sans-serif;
-      font-size: 0.65rem;
-      font-weight: 700;
-      color: #00a1e0;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+      font-size: 0.62rem; font-weight: 700;
+      color: #00a1e0; text-transform: uppercase;
+      letter-spacing: 0.05em; line-height: 1.4;
     }
 
-    /* ── SERVICES ── */
+    /* SERVICES */
     .services-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      max-width: 1200px;
-      margin: 0 auto;
-      border-top: 1px solid rgba(0,0,0,0.08);
+      max-width: 1200px; margin: 0 auto;
     }
-
     .svc {
-      padding: 3rem 2.5rem;
+      padding: 3.5rem 2.5rem;
       text-align: center;
-      border-right: 1px solid rgba(0,0,0,0.08);
       transition: transform 0.2s;
     }
-    .svc:last-child { border-right: none; }
     .svc:hover { transform: translateY(-4px); }
+    .svc:nth-child(1) { background: var(--black); }
+    .svc:nth-child(2) { background: var(--yellow); }
+    .svc:nth-child(3) { background: var(--cardgrey); }
 
-    .svc-icon {
-      width: 56px; height: 56px;
-      margin: 0 auto 1.5rem;
-    }
-
+    .svc-icon { width: 56px; height: 56px; margin: 0 auto 1.5rem; }
     .svc-icon svg { width: 100%; height: 100%; }
 
-    .svc:nth-child(1) { background: var(--black); }
     .svc:nth-child(1) .svc-icon svg { stroke: var(--yellow); }
-    .svc:nth-child(1) h3 { color: var(--yellow); }
-    .svc:nth-child(1) p { color: rgba(255,255,255,0.65); }
-
-    .svc:nth-child(2) { background: var(--yellow); }
     .svc:nth-child(2) .svc-icon svg { stroke: var(--black); }
-    .svc:nth-child(2) h3 { color: var(--black); }
-    .svc:nth-child(2) p { color: rgba(0,0,0,0.7); }
-
-    .svc:nth-child(3) { background: var(--cardgrey); }
     .svc:nth-child(3) .svc-icon svg { stroke: var(--yellow); }
-    .svc:nth-child(3) h3 { color: var(--yellow); }
-    .svc:nth-child(3) p { color: rgba(255,255,255,0.65); }
 
     .svc h3 {
       font-family: 'Montserrat', sans-serif;
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      margin-bottom: 1.2rem;
-      line-height: 1.5;
+      font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      margin-bottom: 1.2rem; line-height: 1.5;
     }
+    .svc:nth-child(1) h3 { color: var(--yellow); }
+    .svc:nth-child(2) h3 { color: var(--black); }
+    .svc:nth-child(3) h3 { color: var(--yellow); }
 
     .svc p { font-size: 0.85rem; line-height: 1.85; }
+    .svc:nth-child(1) p { color: rgba(255,255,255,0.65); }
+    .svc:nth-child(2) p { color: rgba(0,0,0,0.7); }
+    .svc:nth-child(3) p { color: rgba(255,255,255,0.65); }
 
-    /* ── CONTACT ── */
-    .contact-wrap {
-      max-width: 1200px;
-      margin: 0 auto;
+    /* CONTACT */
+    .contact-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 5rem;
-      align-items: start;
+      max-width: 1200px; margin: 0 auto;
+      gap: 5rem; align-items: start;
     }
-
-    .contact-left h2 {
-      font-family: 'Montserrat', sans-serif;
-      font-size: clamp(1.6rem, 3vw, 2.5rem);
-      font-weight: 800;
-      text-transform: uppercase;
-      margin-bottom: 1.2rem;
-    }
-
-    .contact-left p { font-size: 0.9rem; color: var(--grey); line-height: 1.8; margin-bottom: 0.4rem; }
-    .contact-left a { color: var(--yellow-dk); text-decoration: none; font-size: 0.95rem; }
-    .contact-left a:hover { text-decoration: underline; }
-
+    .contact-info p { font-size: 0.9rem; color: var(--grey); line-height: 1.8; margin-bottom: 0.4rem; }
+    .contact-info a { color: var(--yellow-dk); text-decoration: none; font-size: 0.95rem; font-weight: 600; }
+    .contact-info a:hover { text-decoration: underline; }
     .contact-address {
-      margin-top: 1.8rem;
-      padding-top: 1.8rem;
+      margin-top: 1.8rem; padding-top: 1.8rem;
       border-top: 1px solid #eee;
-      font-size: 0.85rem;
-      color: var(--lightgrey);
-      line-height: 2;
+      font-size: 0.85rem; color: var(--lightgrey); line-height: 2.1;
     }
 
-    /* Form */
     .contact-form { display: flex; flex-direction: column; gap: 0.65rem; }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.65rem; }
-
     .contact-form input,
-    .contact-form textarea,
-    .contact-form select {
-      width: 100%;
-      padding: 0.7rem 0.9rem;
+    .contact-form textarea {
+      width: 100%; padding: 0.75rem 0.9rem;
       border: 1px solid #ddd;
       font-family: 'Open Sans', sans-serif;
-      font-size: 0.82rem;
-      color: var(--black);
-      background: #fafafa;
-      outline: none;
+      font-size: 0.82rem; color: var(--black);
+      background: #fafafa; outline: none;
       transition: border-color 0.2s;
-      border-radius: 0;
-      appearance: none;
     }
-
     .contact-form input::placeholder,
     .contact-form textarea::placeholder { color: #bbb; }
     .contact-form input:focus,
     .contact-form textarea:focus { border-color: var(--yellow-dk); background: white; }
-    .contact-form textarea { height: 80px; resize: none; }
+    .contact-form textarea { height: 85px; resize: none; }
 
     .btn-dark {
-      display: inline-block;
-      padding: 0.8rem 2rem;
-      background: var(--black);
-      color: white;
+      display: inline-block; padding: 0.8rem 2rem;
+      background: var(--black); color: white;
       font-family: 'Montserrat', sans-serif;
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      border: none;
-      cursor: pointer;
-      transition: background 0.2s;
-      align-self: flex-start;
+      font-size: 0.68rem; font-weight: 700;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      border: none; cursor: pointer;
+      transition: background 0.2s; align-self: flex-start;
     }
     .btn-dark:hover { background: var(--yellow); color: var(--black); }
 
-    /* ── FOOTER ── */
+    /* FOOTER */
     footer {
       background: var(--black);
       padding: 1.4rem 5vw;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      display: flex; align-items: center; justify-content: space-between;
     }
     footer img { height: 14px; opacity: 0.6; }
     footer p { font-size: 0.68rem; color: #555; }
 
-    /* ── ANIMATIONS ── */
+    /* ANIMATIONS */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(18px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    /* ── MOBILE ── */
+    /* MOBILE */
     @media (max-width: 768px) {
       nav { padding: 0.9rem 1.5rem; }
       nav ul { gap: 1rem; }
-      nav ul a { font-size: 0.6rem; letter-spacing: 0.08em; }
-      #inicio { grid-template-columns: 0.25fr 1fr 0.25fr; }
-      .quienes-wrap { grid-template-columns: 1fr; }
-      .quienes-text { padding: 0; }
-      .quienes-visual { min-height: 280px; }
+      nav ul a { font-size: 0.6rem; }
+      #inicio { grid-template-columns: 0.2fr 1fr 0.2fr; }
+      .band { padding: 2.5rem 1.5rem; }
+      .content { padding: 3.5rem 1.5rem; }
+      .quienes-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .quienes-visual { min-height: 260px; }
       .services-grid { grid-template-columns: 1fr; }
-      .svc { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
-      .contact-wrap { grid-template-columns: 1fr; gap: 3rem; }
+      .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
       .form-row { grid-template-columns: 1fr; }
       footer { flex-direction: column; gap: 0.6rem; text-align: center; }
     }
@@ -433,20 +296,13 @@
     <div class="hero-panel geo"></div>
   </section>
 
-  <!-- BAND: QUIENES -->
-  <div class="band geo" id="quienes-band">
-    <h2>Quiénes<br>Somos</h2>
+  <!-- QUIENES SOMOS -->
+  <div class="band geo" id="quienes">
+    <h2>Quiénes Somos</h2>
   </div>
-
-  <!-- QUIENES CONTENT -->
-  <div class="content-section" id="quienes">
-    <div class="quienes-wrap">
+  <div class="content">
+    <div class="quienes-grid">
       <div class="quienes-text">
-        <div class="icon-circle">
-          <img src="images/iso.avif" alt="" />
-        </div>
-        <div class="accent-bar"></div>
-        <h2>Quienes<br>Somos</h2>
         <p>VectorNewton se fundó con una única misión: ser la consultora de Salesforce más exitosa del Uruguay. Trabajamos con cada cliente, estudiando a fondo sus necesidades y adaptando la solución a medida.</p>
         <p>Contactanos y danos la oportunidad de demostrarte la pasión que ponemos en cada cosa que hacemos.</p>
         <div class="badges">
@@ -457,7 +313,7 @@
       <div class="quienes-visual">
         <div class="quienes-visual-inner">
           <img src="images/iso.avif" alt="Vector Newton" class="iso-big" />
-          <div class="sf-badge-wrap">
+          <div class="sf-card">
             <img src="https://static.wixstatic.com/media/15b1bd_f68be2f3697e466a849097ba0848457c~mv2.png" alt="" />
             <span>Salesforce<br>Certified Partner</span>
           </div>
@@ -466,65 +322,50 @@
     </div>
   </div>
 
-  <!-- BAND: SERVICIOS -->
-  <div class="band geo" id="servicios-band">
-    <h2>En qué te<br>ayudamos</h2>
+  <!-- SERVICIOS -->
+  <div class="band geo" id="servicios">
+    <h2>En qué te ayudamos</h2>
     <p>Garantizamos superar tus expectativas en tu implementación de Salesforce.</p>
   </div>
-
-  <!-- SERVICES -->
-  <div class="content-section" id="servicios" style="padding-top:0; padding-bottom:0;">
-    <div class="services-grid">
-
-      <div class="svc">
-        <div class="svc-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
-            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
-          </svg>
-        </div>
-        <h3>Ventas</h3>
-        <p>Con vasta experiencia en Salesforce, nuestros consultores te ayudarán a llevar tu empresa al próximo nivel. Aprovechamos Sales Cloud 360 para conectar tu equipo de ventas con marketing, servicio, comercio y mucho más.</p>
+  <div class="services-grid">
+    <div class="svc">
+      <div class="svc-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+        </svg>
       </div>
-
-      <div class="svc">
-        <div class="svc-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-            <circle cx="12" cy="7" r="4"/>
-          </svg>
-        </div>
-        <h3>Atención<br>al Cliente</h3>
-        <p>Respondé rápidamente a las necesidades del cliente en cualquier canal. Resolvé casos más rápido con herramientas potentes, predicciones basadas en IA y soporte instantáneo con chatbot.</p>
+      <h3>Ventas</h3>
+      <p>Con vasta experiencia en Salesforce, nuestros consultores te ayudarán a llevar tu empresa al próximo nivel. Aprovechamos Sales Cloud 360 para conectar tu equipo de ventas con marketing, servicio, comercio y mucho más.</p>
+    </div>
+    <div class="svc">
+      <div class="svc-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+          <circle cx="12" cy="7" r="4"/>
+        </svg>
       </div>
-
-      <div class="svc">
-        <div class="svc-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
-          </svg>
-        </div>
-        <h3>Marketing</h3>
-        <p>Una plataforma con múltiples herramientas para gestionar eficientemente la interacción de tu marca con clientes a través de diferentes canales, en el momento y canal adecuados.</p>
+      <h3>Atención al Cliente</h3>
+      <p>Respondé rápidamente a las necesidades del cliente en cualquier canal. Resolvé casos más rápido con herramientas potentes, predicciones basadas en IA y soporte instantáneo con chatbot.</p>
+    </div>
+    <div class="svc">
+      <div class="svc-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+        </svg>
       </div>
-
+      <h3>Marketing</h3>
+      <p>Una plataforma con múltiples herramientas para gestionar eficientemente la interacción de tu marca con clientes a través de diferentes canales, en el momento y canal adecuados.</p>
     </div>
   </div>
 
-  <!-- BAND: CONTACTO -->
-  <div class="band geo" id="contacto-band">
+  <!-- CONTACTO -->
+  <div class="band geo" id="contacto">
     <h2>Contacto</h2>
   </div>
-
-  <!-- CONTACTO -->
-  <div class="content-section" id="contacto">
-    <div class="contact-wrap">
-      <div class="contact-left">
-        <div class="icon-circle">
-          <img src="images/iso.avif" alt="" />
-        </div>
-        <div class="accent-bar"></div>
-        <h2>Contacto</h2>
+  <div class="content">
+    <div class="contact-grid">
+      <div class="contact-info">
         <p>Para consultas y propuestas:</p>
         <a href="mailto:ventas@vectornewton.com">ventas@vectornewton.com</a>
         <div class="contact-address">
