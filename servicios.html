@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Servicios | Vector Newton</title>
+  <meta name="description" content="Automatización comercial para real estate: CRM, WhatsApp Business, agentes de IA y reportería automática." />
+  <link rel="icon" type="image/png" href="images/favicon.png" />
+  <link rel="apple-touch-icon" href="images/favicon-180.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --yellow: #F5C200;
+      --yellow-dk: #c9a000;
+      --black: #1a1a1a;
+      --grey: #555;
+      --lightgrey: #999;
+      --white: #ffffff;
+      --offwhite: #f8f8f6;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Open Sans', sans-serif; font-weight: 300; color: var(--black); overflow-x: hidden; }
+
+    .geo {
+      background-image: url('images/trama.png');
+      background-size: 200px 200px;
+      background-color: var(--yellow);
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.8rem 5vw;
+      background: rgba(26,26,26,0.97);
+      backdrop-filter: blur(12px);
+    }
+    .nav-brand { display: flex; align-items: center; text-decoration: none; }
+    .nav-brand img { height: 28px; width: auto; }
+    nav ul { list-style: none; display: flex; gap: 2.2rem; }
+    nav ul a {
+      color: #999; text-decoration: none;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    nav ul a:hover { color: var(--yellow); }
+
+    /* HERO BAND */
+    .page-hero {
+      padding-top: 50px;
+    }
+
+    .page-hero-band {
+      padding: 4rem 5vw 3rem;
+    }
+
+    .page-hero-band .eyebrow {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: rgba(0,0,0,0.5); margin-bottom: 0.8rem;
+    }
+
+    .page-hero-band h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 900; text-transform: uppercase;
+      line-height: 1; color: var(--black);
+      margin-bottom: 1rem;
+    }
+
+    .page-hero-band p {
+      font-size: 1rem; color: rgba(0,0,0,0.65);
+      max-width: 560px; line-height: 1.7;
+    }
+
+    /* INTRO STRIP */
+    .intro-strip {
+      background: var(--black);
+      padding: 3rem 5vw;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+    }
+
+    .intro-stat { text-align: center; }
+    .intro-stat .num {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.5rem; font-weight: 900;
+      color: var(--yellow); line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+    .intro-stat .lbl {
+      font-size: 0.75rem; color: rgba(255,255,255,0.6);
+      letter-spacing: 0.05em; line-height: 1.4;
+    }
+
+    /* PHASE SECTIONS */
+    .phase {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      max-width: 1200px; margin: 0 auto;
+      gap: 0;
+      border-top: 1px solid #eee;
+    }
+
+    .phase:first-of-type { border-top: none; }
+
+    .phase-sidebar {
+      padding: 3.5rem 3rem 3.5rem 0;
+      border-right: 3px solid var(--yellow);
+      display: flex; flex-direction: column;
+      gap: 1rem;
+    }
+
+    .phase-num {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.65rem; font-weight: 700;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--yellow-dk);
+    }
+
+    .phase-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.4rem; font-weight: 800;
+      text-transform: uppercase; line-height: 1.2;
+      color: var(--black);
+    }
+
+    .phase-price {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.1rem; font-weight: 700;
+      color: var(--black);
+    }
+
+    .phase-duration {
+      font-size: 0.78rem; color: var(--lightgrey);
+    }
+
+    .phase-tools {
+      display: flex; flex-wrap: wrap; gap: 0.4rem;
+      margin-top: 0.5rem;
+    }
+
+    .tool-tag {
+      display: inline-block;
+      padding: 0.25rem 0.65rem;
+      background: var(--yellow);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.6rem; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--black);
+    }
+
+    .phase-body {
+      padding: 3.5rem 0 3.5rem 3.5rem;
+    }
+
+    .phase-body p.lead {
+      font-size: 1rem; color: var(--grey);
+      line-height: 1.85; margin-bottom: 2rem;
+    }
+
+    .deliverables {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .deliverable {
+      display: flex; gap: 0.75rem; align-items: flex-start;
+    }
+
+    .deliverable-icon {
+      width: 32px; height: 32px; flex-shrink: 0;
+      background: var(--yellow);
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .deliverable-icon svg { width: 16px; height: 16px; }
+
+    .deliverable-text {
+      font-size: 0.85rem; color: var(--grey); line-height: 1.6;
+    }
+
+    .deliverable-text strong {
+      display: block; font-weight: 600;
+      color: var(--black); margin-bottom: 0.2rem;
+      font-size: 0.82rem;
+    }
+
+    /* PHASES WRAPPER */
+    .phases-wrap {
+      padding: 4rem 5vw;
+      background: var(--white);
+    }
+
+    /* RECURRING COSTS */
+    .costs-section {
+      background: var(--offwhite);
+      padding: 4rem 5vw;
+    }
+
+    .costs-section h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.4rem; font-weight: 800;
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+
+    .costs-section p {
+      font-size: 0.9rem; color: var(--grey);
+      margin-bottom: 2rem;
+    }
+
+    .costs-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1rem;
+      max-width: 1200px;
+    }
+
+    .cost-card {
+      background: var(--white);
+      border-top: 3px solid var(--yellow);
+      padding: 1.5rem 1.2rem;
+    }
+
+    .cost-card .service-name {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.72rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      color: var(--black); margin-bottom: 0.5rem;
+    }
+
+    .cost-card .cost-amount {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1rem; font-weight: 800;
+      color: var(--black); margin-bottom: 0.3rem;
+    }
+
+    .cost-card .cost-note {
+      font-size: 0.72rem; color: var(--lightgrey); line-height: 1.5;
+    }
+
+    /* TOTAL BAND */
+    .total-band {
+      padding: 3rem 5vw;
+      display: flex; align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+
+    .total-band .total-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.7rem; font-weight: 600;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(0,0,0,0.5); margin-bottom: 0.5rem;
+    }
+
+    .total-band .total-amount {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(2rem, 5vw, 4rem);
+      font-weight: 900; color: var(--black);
+      line-height: 1;
+    }
+
+    .total-band .total-note {
+      font-size: 0.85rem; color: rgba(0,0,0,0.5);
+      max-width: 400px; line-height: 1.7;
+    }
+
+    .btn-yellow {
+      display: inline-block; padding: 1rem 2.5rem;
+      background: var(--black); color: var(--white);
+      text-decoration: none;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+    .btn-yellow:hover { background: var(--yellow); color: var(--black); }
+
+    /* FOOTER */
+    footer {
+      background: var(--black); padding: 1.4rem 5vw;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    footer img { height: 20px; opacity: 0.7; }
+    footer p { font-size: 0.68rem; color: #555; }
+
+    /* MOBILE */
+    @media (max-width: 900px) {
+      .intro-strip { grid-template-columns: repeat(2, 1fr); }
+      .phase { grid-template-columns: 1fr; }
+      .phase-sidebar { border-right: none; border-bottom: 3px solid var(--yellow); padding: 2rem 0; }
+      .phase-body { padding: 2rem 0; }
+      .deliverables { grid-template-columns: 1fr; }
+      .costs-grid { grid-template-columns: repeat(2, 1fr); }
+      .total-band { flex-direction: column; align-items: flex-start; }
+      footer { flex-direction: column; gap: 0.6rem; text-align: center; }
+    }
+
+    @media (max-width: 600px) {
+      nav ul { gap: 1rem; }
+      nav ul a { font-size: 0.6rem; }
+      .costs-grid { grid-template-columns: 1fr; }
+      .intro-strip { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-brand">
+      <img src="images/logo-mini.png" alt="Vector Newton" />
+    </a>
+    <ul>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="index.html#quienes">Quiénes Somos</a></li>
+      <li><a href="index.html#servicios">Servicios</a></li>
+      <li><a href="index.html#contacto">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <div class="page-hero">
+    <div class="page-hero-band geo">
+      <p class="eyebrow">Automatización Comercial</p>
+      <h1>Soluciones<br>Integrales</h1>
+      <p>Implementamos ecosistemas completos de ventas para empresas de real estate: CRM, WhatsApp Business, agentes de IA y reportería automática.</p>
+    </div>
+  </div>
+
+  <!-- STATS STRIP -->
+  <div class="intro-strip">
+    <div class="intro-stat">
+      <div class="num">24/7</div>
+      <div class="lbl">Atención automática<br>por WhatsApp</div>
+    </div>
+    <div class="intro-stat">
+      <div class="num">4</div>
+      <div class="lbl">Fases de implementación<br>secuenciales</div>
+    </div>
+    <div class="intro-stat">
+      <div class="num">7–9</div>
+      <div class="lbl">Semanas de<br>implementación total</div>
+    </div>
+    <div class="intro-stat">
+      <div class="num">30d</div>
+      <div class="lbl">Soporte post<br>go-live incluido</div>
+    </div>
+  </div>
+
+  <!-- PHASES -->
+  <div class="phases-wrap">
+
+    <!-- FASE 1 -->
+    <div class="phase">
+      <div class="phase-sidebar">
+        <span class="phase-num">Fase 01</span>
+        <div class="phase-title">CRM<br>Pipedrive</div>
+        <div class="phase-price">USD 1.500</div>
+        <div class="phase-duration">3 semanas</div>
+        <div class="phase-tools">
+          <span class="tool-tag">Pipedrive</span>
+          <span class="tool-tag">Make.com</span>
+        </div>
+      </div>
+      <div class="phase-body">
+        <p class="lead">Configuración completa de Pipedrive con dos embudos de ventas, campos personalizados para real estate, automatizaciones nativas y capacitación del equipo.</p>
+        <div class="deliverables">
+          <div class="deliverable">
+            <div class="deliverable-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="deliverable-text">
+              <strong>Embudo Torre de Control</strong>
+              Pipeline general: desde lead nuevo hasta cierre, con motivo de pérdida registrado.
+            </div>
+          </div>
+          <div class="deliverable">
+            <div class="deliverable-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="deliverable-text">
+              <strong>Embudo Ejecutivos</strong>
+              Pipeline individual por ejecutivo con seguimiento y compromiso.
+            </div>
+          </div>
+          <div class="deliverable">
+            <div class="deliverable-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="deliverable-text">
+              <strong>Automatizaciones Nativas</strong>
+              Seguimiento automático, notificaciones por inactividad, templates de email.
+            </div>
+          </div>
+          <div class="deliverable">
+            <div class="deliverable-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="deliverable-text">
+              <strong>Capacitación + Soporte 30d</strong>
+              Sesión en vivo, guía de uso y 30 días de soporte post go-live.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FASE 2 -->
+    <div class="phase">
+      <div class="phase-sidebar">
+        <span class="phase-num">Fase 02</span>
+        <div class="phase-title">WhatsApp<br>Business</div>
+        <div class="phase-price">USD 1.500</div>
+        <div class="phase-duration">1–2 semanas</div>
+        <div class="phase-tools">
+          <span class="tool-tag">Wati</span>
+          <span class="tool-tag">Make.com</span>
+          <span class="tool-tag">Meta API</span>
+        </div>
+      </div>
+      <div class="phase-body">
+        <p class="lead">Integración de WhatsApp Business con Pipedrive, centralización de conversaciones con inversores y envío de mensajes masivos segmentados desde el CRM.</p>
+        <div class="deliverables">
+          <div class="deliverable">
+            <div class="deliverable-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="deliverable-text">
+              <strong>Wati + WhatsApp Business API</strong>
+              Configuración completa y conexión con Meta Business verificado.
+            </div>
+          </div>
+          <div class="deliverable">
+            <div class="deliverable-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="deliverable-text">
+              <strong>Integración Wati ↔ Pipedrive</strong>
+              Creación automática de leads desde conversaciones entrantes.
+            </div>
+          </div>
+          <div class="deliverable">
+            <div class="deliverable-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="deliverable-text">
+              <strong>Templates Aprobados por Meta</strong>
+              Mensajes salientes para seguimiento, confirmaciones y campañas.
+            </div>
+          </div>
+          <div class="deliverable">
+            <div class="deliverable-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="deliverable-text">
+              <strong>Sincronización de Contactos</strong>
+              Bidireccional entre Wati y Pipedrive vía Make.com.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FASE 3 -->
+    <div class="phase">
+      <div class="phase-sidebar">
+        <span class="phase-num">Fase 03</span>
+        <div class="phase-title">Agente de<br>Ventas IA</div>
+        <div class="phase-price">USD 4.000</div>
+        <div class="phase-duration">2–3 semanas</div>
+        <div class="phase-tools">
+          <span class="tool-tag">OpenClaw</span>
+          <span class="tool-tag">Claude AI</span>
+          <span class="tool-tag">VPS</span>
+          <span class="tool-tag">Telegram</span>
+        </div>
+      </div>
+      <div class="phase-body">
+        <p class="lead">Agente conversacional con IA que atiende inversores 24/7 por WhatsApp, califica leads automáticamente, responde consultas sobre los proyectos y agenda reuniones con el equipo comercial.</p>
+        <div class="deliverables">
+          <div class="deliverable">
+            <div class="deliverable-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="deliverable-text">
+              <strong>Agente 24/7 vía WhatsApp</strong>
+              Basado en Claude (Anthropic) + OpenClaw, desplegado en VPS dedicado.
+            </div>
+          </div>
+          <div class="deliverable">
+            <div class="deliverable-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="deliverable-text">
+              <strong>Agendamiento Automático</strong>
+              Verificación de disponibilidad en Google Calendar y asignación round-robin entre ejecutivos.
+            </div>
+          </div>
+          <div class="deliverable">
+            <div class="deliverable-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="deliverable-text">
+              <strong>Actualización Automática de CRM</strong>
+              El agente actualiza deals en Pipedrive según avance de la conversación.
+            </div>
+          </div>
+          <div class="deliverable">
+            <div class="deliverable-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="deliverable-text">
+              <strong>Alertas por Telegram</strong>
+              Notificaciones de leads calientes y reuniones agendadas al equipo comercial.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FASE 4 -->
+    <div class="phase">
+      <div class="phase-sidebar">
+        <span class="phase-num">Fase 04</span>
+        <div class="phase-title">Reportería<br>Automática</div>
+        <div class="phase-price">USD 1.000</div>
+        <div class="phase-duration">1 semana</div>
+        <div class="phase-tools">
+          <span class="tool-tag">Pipedrive API</span>
+          <span class="tool-tag">Telegram</span>
+          <span class="tool-tag">Brevo</span>
+        </div>
+      </div>
+      <div class="phase-body">
+        <p class="lead">Reportes automáticos con métricas clave del pipeline enviados diariamente al equipo directivo y comercial — sin intervención manual.</p>
+        <div class="deliverables">
+          <div class="deliverable">
+            <div class="deliverable-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="deliverable-text">
+              <strong>Reporte Diario vía Telegram</strong>
+              Deals por etapa, montos, deals estancados y conversión por ejecutivo.
+            </div>
+          </div>
+          <div class="deliverable">
+            <div class="deliverable-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="deliverable-text">
+              <strong>Reporte Semanal por Email</strong>
+              Resumen ejecutivo con evolución del pipeline y KPIs definidos con la dirección.
+            </div>
+          </div>
+          <div class="deliverable">
+            <div class="deliverable-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="deliverable-text">
+              <strong>Extracción vía Pipedrive API v2</strong>
+              Script dedicado con snapshots diarios para histórico y tendencias.
+            </div>
+          </div>
+          <div class="deliverable">
+            <div class="deliverable-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="deliverable-text">
+              <strong>Bot de Telegram Dedicado</strong>
+              Canal privado para el equipo con alertas y reportes en tiempo real.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /phases-wrap -->
+
+  <!-- RECURRING COSTS -->
+  <div class="costs-section">
+    <h2>Costos Recurrentes</h2>
+    <p>Pagados directamente por el cliente a los proveedores. Sin markup de Vector Newton.</p>
+    <div class="costs-grid">
+      <div class="cost-card">
+        <div class="service-name">Pipedrive CRM</div>
+        <div class="cost-amount">Según plan</div>
+        <div class="cost-note">Essential desde USD 14/usuario/mes</div>
+      </div>
+      <div class="cost-card">
+        <div class="service-name">Wati WhatsApp API</div>
+        <div class="cost-amount">USD 39–49/mes</div>
+        <div class="cost-note">Plan anual USD 39/mes, mensual USD 49/mes</div>
+      </div>
+      <div class="cost-card">
+        <div class="service-name">VPS Servidor IA</div>
+        <div class="cost-amount">USD 12–24/mes</div>
+        <div class="cost-note">DigitalOcean o equivalente según volumen</div>
+      </div>
+      <div class="cost-card">
+        <div class="service-name">API Anthropic</div>
+        <div class="cost-amount">USD 20–80/mes</div>
+        <div class="cost-note">Variable según volumen de conversaciones</div>
+      </div>
+      <div class="cost-card">
+        <div class="service-name">Make.com</div>
+        <div class="cost-amount">Desde gratis</div>
+        <div class="cost-note">Tier gratuito o básico según cantidad de operaciones</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOTAL -->
+  <div class="total-band geo">
+    <div>
+      <div class="total-label">Inversión Total del Proyecto</div>
+      <div class="total-amount">USD 8.000</div>
+    </div>
+    <div class="total-note">
+      Pago en 3 hitos: 30% al kick-off, 30% al completar Fase 2, 40% al completar Fases 3 y 4. Validez de la propuesta: 30 días.
+    </div>
+    <a href="index.html#contacto" class="btn-yellow">Contactanos</a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <img src="images/logo-mini.png" alt="Vector Newton" />
+    <p>©2021 by VectorNewton. ©Images by freepik</p>
+  </footer>
+
+</body>
+</html>
