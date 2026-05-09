@@ -306,15 +306,15 @@
         <p>VectorNewton se fundó con una única misión: ser la consultora de Salesforce más exitosa del Uruguay. Trabajamos con cada cliente, estudiando a fondo sus necesidades y adaptando la solución a medida.</p>
         <p>Contactanos y danos la oportunidad de demostrarte la pasión que ponemos en cada cosa que hacemos.</p>
         <div class="badges">
-          <img src="https://static.wixstatic.com/media/15b1bd_f68be2f3697e466a849097ba0848457c~mv2.png" alt="Sales Cloud Consultant" />
-          <img src="https://static.wixstatic.com/media/15b1bd_2cb956af78b448019dbfe8f4d9e92023~mv2.png" alt="Admin Certified" />
+          <img src="images/salesforce_consultant_badge.avif" alt="Sales Cloud Consultant" />
+          <img src="images/salesforce_admin_badge.avif" alt="Admin Certified" />
         </div>
       </div>
       <div class="quienes-visual">
         <div class="quienes-visual-inner">
           <img src="images/iso.avif" alt="Vector Newton" class="iso-big" />
           <div class="sf-card">
-            <img src="https://static.wixstatic.com/media/15b1bd_f68be2f3697e466a849097ba0848457c~mv2.png" alt="" />
+            <img src="images/salesforce_consultant_badge.avif" alt="" />
             <span>Salesforce<br>Certified Partner</span>
           </div>
         </div>
@@ -374,20 +374,22 @@
           Colonia del Sacramento, Uruguay
         </div>
       </div>
-      <div class="contact-form">
+      <form class="contact-form" action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="a0ff8907-d8d7-49fc-9c88-18ce12824bb3" />
+        <input type="hidden" name="subject" value="Nuevo contacto desde vectornewton.com" />
         <div class="form-row">
-          <input type="text" placeholder="Nombre" />
-          <input type="text" placeholder="Apellido" />
+          <input type="text" name="nombre" placeholder="Nombre" required />
+          <input type="text" name="apellido" placeholder="Apellido" />
         </div>
-        <input type="email" placeholder="Email" />
-        <input type="text" placeholder="Empresa" />
+        <input type="email" name="email" placeholder="Email" required />
+        <input type="text" name="empresa" placeholder="Empresa" />
         <div class="form-row">
-          <input type="text" placeholder="Ciudad" />
-          <input type="text" placeholder="País" />
+          <input type="text" name="ciudad" placeholder="Ciudad" />
+          <input type="text" name="pais" placeholder="País" />
         </div>
-        <textarea placeholder="Comentario"></textarea>
-        <button class="btn-dark">Enviar</button>
-      </div>
+        <textarea name="comentario" placeholder="Comentario"></textarea>
+        <button type="submit" class="btn-dark">Enviar</button>
+      </form>
     </div>
   </div>
 
